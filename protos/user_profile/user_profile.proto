@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package user_profile;
+
+option go_package = "generate/user_profile";
+
+service UserService {
+  rpc Create(User) returns (Void);
+  rpc Get(FilterRequest) returns (Users);
+  rpc GetByID(UserId) returns (User);
+  rpc Update(User) returns (Void);
+  rpc Delete(UserId) returns (Void);
+}
+
+message Void{}
+
+message User{
+  string userID = 1;
+  string fullName = 2;
+  string bio = 3;
+  string role = 4;
+  string location = 5;
+  string avatar_url = 6;
+  string website = 7;
+}
+
+message FilterRequest{
+  string query = 1;
+  repeated string arr = 2;
+}
+
+message Users{
+  repeated User users = 1;
+}
+
+message UserId {
+  string id = 1;
+}
