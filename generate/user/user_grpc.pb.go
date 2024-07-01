@@ -23,9 +23,9 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
 	Create(ctx context.Context, in *User, opts ...grpc.CallOption) (*Void, error)
-	Get(ctx context.Context, in *FilterRequest, opts ...grpc.CallOption) (*Users, error)
-	GetByID(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*User, error)
-	Update(ctx context.Context, in *User, opts ...grpc.CallOption) (*Void, error)
+	Get(ctx context.Context, in *FilterRequest, opts ...grpc.CallOption) (*UsersRes, error)
+	GetByID(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*UserRes, error)
+	Update(ctx context.Context, in *UserRes, opts ...grpc.CallOption) (*Void, error)
 	Delete(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Void, error)
 }
 
@@ -46,8 +46,8 @@ func (c *userServiceClient) Create(ctx context.Context, in *User, opts ...grpc.C
 	return out, nil
 }
 
-func (c *userServiceClient) Get(ctx context.Context, in *FilterRequest, opts ...grpc.CallOption) (*Users, error) {
-	out := new(Users)
+func (c *userServiceClient) Get(ctx context.Context, in *FilterRequest, opts ...grpc.CallOption) (*UsersRes, error) {
+	out := new(UsersRes)
 	err := c.cc.Invoke(ctx, "/user.UserService/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -55,8 +55,8 @@ func (c *userServiceClient) Get(ctx context.Context, in *FilterRequest, opts ...
 	return out, nil
 }
 
-func (c *userServiceClient) GetByID(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*User, error) {
-	out := new(User)
+func (c *userServiceClient) GetByID(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*UserRes, error) {
+	out := new(UserRes)
 	err := c.cc.Invoke(ctx, "/user.UserService/GetByID", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -64,7 +64,7 @@ func (c *userServiceClient) GetByID(ctx context.Context, in *UserId, opts ...grp
 	return out, nil
 }
 
-func (c *userServiceClient) Update(ctx context.Context, in *User, opts ...grpc.CallOption) (*Void, error) {
+func (c *userServiceClient) Update(ctx context.Context, in *UserRes, opts ...grpc.CallOption) (*Void, error) {
 	out := new(Void)
 	err := c.cc.Invoke(ctx, "/user.UserService/Update", in, out, opts...)
 	if err != nil {
@@ -87,9 +87,9 @@ func (c *userServiceClient) Delete(ctx context.Context, in *UserId, opts ...grpc
 // for forward compatibility
 type UserServiceServer interface {
 	Create(context.Context, *User) (*Void, error)
-	Get(context.Context, *FilterRequest) (*Users, error)
-	GetByID(context.Context, *UserId) (*User, error)
-	Update(context.Context, *User) (*Void, error)
+	Get(context.Context, *FilterRequest) (*UsersRes, error)
+	GetByID(context.Context, *UserId) (*UserRes, error)
+	Update(context.Context, *UserRes) (*Void, error)
 	Delete(context.Context, *UserId) (*Void, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
@@ -101,13 +101,13 @@ type UnimplementedUserServiceServer struct {
 func (UnimplementedUserServiceServer) Create(context.Context, *User) (*Void, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedUserServiceServer) Get(context.Context, *FilterRequest) (*Users, error) {
+func (UnimplementedUserServiceServer) Get(context.Context, *FilterRequest) (*UsersRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedUserServiceServer) GetByID(context.Context, *UserId) (*User, error) {
+func (UnimplementedUserServiceServer) GetByID(context.Context, *UserId) (*UserRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetByID not implemented")
 }
-func (UnimplementedUserServiceServer) Update(context.Context, *User) (*Void, error) {
+func (UnimplementedUserServiceServer) Update(context.Context, *UserRes) (*Void, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedUserServiceServer) Delete(context.Context, *UserId) (*Void, error) {
@@ -181,7 +181,7 @@ func _UserService_GetByID_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _UserService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(User)
+	in := new(UserRes)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -193,7 +193,7 @@ func _UserService_Update_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/user.UserService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).Update(ctx, req.(*User))
+		return srv.(UserServiceServer).Update(ctx, req.(*UserRes))
 	}
 	return interceptor(ctx, in, info, handler)
 }

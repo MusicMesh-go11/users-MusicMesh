@@ -1,16 +1,15 @@
-package userprofile
+package userprofiles
 
 import (
-	pb "MusicMesh/users-MusicMesh/generate/user_profile"
-	"context"
+	"MusicMesh/users-MusicMesh/generate/user_profile"
 	"database/sql"
 )
 
 type UserProfileRepo struct {
-	pb.UnimplementedUserServiceServer
 	DB *sql.DB
+	user_profile.UnimplementedUserServiceServer
 }
 
-func (u *UserProfileRepo) Create(ctx context.Context, user *pb.User) (*pb.Void, error){
-	
+func NewUserProfile(db *sql.DB) *UserProfileRepo {
+	return &UserProfileRepo{DB: db}
 }

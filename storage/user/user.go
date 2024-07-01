@@ -1,12 +1,12 @@
-package user
+package users
 
 import (
-	pb"MusicMesh/users-MusicMesh/generate/user"
+	"MusicMesh/users-MusicMesh/generate/user"
 	"database/sql"
 )
 
 type UserRepo struct {
-	pb.UnimplementedUserServiceServer
+	user.UnimplementedUserServiceServer
 	DB *sql.DB
 }
 
