@@ -14,7 +14,7 @@ func (u *UserProfileRepo) Create(ctx context.Context, in *pb.UserProfile) (*pb.V
 
 func (u *UserProfileRepo) GetById(ctx context.Context, in *pb.UserProfileId) (*pb.UserProfile, error) {
 	user := pb.UserProfile{}
-	err := u.DB.QueryRow("select * from user_profiles where user_id = $1", in.Id).
+	err := u.DB.QueryRow("select user_id, full_name, bio, role, location, avatar_url, website from user_profiles where user_id = $1", in.Id).
 		Scan(&user.UserID, &user.FullName, &user.Bio, &user.Role, &user.Location, &user.AvatarUrl, &user.Website)
 	return &user, err
 }
@@ -22,7 +22,7 @@ func (u *UserProfileRepo) GetById(ctx context.Context, in *pb.UserProfileId) (*p
 func (u *UserProfileRepo) Get(ctx context.Context, in *pb.FilterRequest) (*pb.UsersProfiles, error) {
 	users := []*pb.UserProfile{}
 
-	rows, err := u.DB.Query(in.Query, in.Arr)
+	rows, err := u.DB.Query(in.Query, in.Arr...)
 	if err != nil {
 		return nil, err
 	}
@@ -39,15 +39,15 @@ func (u *UserProfileRepo) Get(ctx context.Context, in *pb.FilterRequest) (*pb.Us
 }
 
 func (u *UserProfileRepo) Update(ctx context.Context, in *pb.UserProfile) (*pb.Void, error) {
-	_, err := u.DB.Exec(`UPDATE user_profiles SET full_name = $1, bio = $2, role = $3," +
-		"ocation = $4, avatar_url = $5, website = $6 WHERE user_id = $7`,
+	_, err := u.DB.Exec(`UPDATE user_profiles SET full_name = $1, bio = $2, role = $3,
+                         location = $4, avatar_url = $5, website = $6 WHERE user_id = $7`,
 		in.FullName, in.Bio, in.Role, in.Location, in.AvatarUrl, in.Website, in.UserID)
 	return &pb.Void{}, err
 }
 
 func (u *UserProfileRepo) Delete(ctx context.Context, in *pb.UserProfileId) (*pb.Void, error) {
-	_, err := u.DB.Exec(`update user_profiles set
- deleted_at = date_part('epoch', current_timestamp)::INT
-where user_id = $1 and deleted_at = 0`)
+	_, err := u.DB.Exec(`update user_profiles set 
+                         deleted_at = date_part('epoch', current_timestamp)::INT 
+                     where user_id = $1 and deleted_at = 0`, in.Id)
 	return &pb.Void{}, err
 }

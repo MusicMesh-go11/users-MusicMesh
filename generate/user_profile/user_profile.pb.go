@@ -206,7 +206,7 @@ type FilterRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	Query string   `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
-	Arr   []string `protobuf:"bytes,2,rep,name=arr,proto3" json:"arr,omitempty"`
+	Arr   []interface{} `protobuf:"bytes,2,rep,name=arr,proto3" json:"arr,omitempty"`
 }
 
 func (x *FilterRequest) Reset() {
@@ -248,7 +248,7 @@ func (x *FilterRequest) GetQuery() string {
 	return ""
 }
 
-func (x *FilterRequest) GetArr() []string {
+func (x *FilterRequest) GetArr() []interface{} {
 	if x != nil {
 		return x.Arr
 	}

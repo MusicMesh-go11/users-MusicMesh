@@ -43,9 +43,9 @@ func (u *UserRepo) Update(ctx context.Context, in *pb.UserRes) (*pb.Void, error)
 	return &pb.Void{}, err
 }
 
-func (u *UserRepo) Delete(context.Context, *pb.UserId) (*pb.Void, error) {
+func (u *UserRepo) Delete(ctx context.Context, in *pb.UserId) (*pb.Void, error) {
 	_, err := u.DB.Exec(`update users set
  deleted_at = date_part('epoch', current_timestamp)::INT
-where user_id = $1 and deleted_at = 0`)
+where user_id = $1 and deleted_at = 0`, in.Id)
 	return &pb.Void{}, err
 }
