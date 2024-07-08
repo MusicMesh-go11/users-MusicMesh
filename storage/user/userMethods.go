@@ -3,6 +3,7 @@ package users
 import (
 	pb "MusicMesh/users-MusicMesh/generate/user"
 	"context"
+	"fmt"
 )
 
 func (u *UserRepo) Create(ctx context.Context, in *pb.User) (*pb.Void, error) {
@@ -12,15 +13,17 @@ func (u *UserRepo) Create(ctx context.Context, in *pb.User) (*pb.Void, error) {
 }
 
 func (u *UserRepo) Get(ctx context.Context, in *pb.FilterRequest) (*pb.UsersRes, error) {
-	rows, err := u.DB.Query(in.Query, in.Arr)
+	rows, err := u.DB.Query(in.Query)
 	if err != nil {
+		fmt.Println("[1] ", err)
 		return nil, err
 	}
 	users := &pb.UsersRes{}
 	for rows.Next() {
 		user := &pb.UserRes{}
-		err = rows.Scan(&user.UserID, &user.UserName, &user.Email, &user.Password, &user.CreatedAt)
+		err = rows.Scan(&user.UserID, &user.UserName, &user.Email, &user.Password, &user.CreatedAt, &user.UpdatedAt)
 		if err != nil {
+			fmt.Println("[2] ", err)
 			return nil, err
 		}
 		users.Users = append(users.Users, user)

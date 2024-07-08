@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b413a7b6-162c-4264-aae6-dfa6be2ef4fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate/collaboration/collaboration.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/generate/collaboration/collaboration.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate/collaboration/collaboration_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/generate/collaboration/collaboration_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate/comment/comments.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/generate/comment/comments.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate/composition/composition.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/generate/composition/composition.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate/composition_metadata/composition_metadata.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/generate/composition_metadata/composition_metadata.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate/composition_metadata/composition_metadata_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/generate/composition_metadata/composition_metadata_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate/invitation/invitations.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/generate/invitation/invitations.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate/user/user.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/generate/user/user.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate/user_profile/user_profile.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/generate/user_profile/user_profile.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/postgres/connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/storage/postgres/connection.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/user/userMethods.go" beforeDir="false" afterPath="$PROJECT_DIR$/storage/user/userMethods.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/user_profile/methods.go" beforeDir="false" afterPath="$PROJECT_DIR$/storage/user_profile/methods.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +32,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$USER_HOME$/golang/pkg/mod/golang.org/toolchain@v0.0.1-go1.22.4.linux-amd64" />
+  <component name="GOROOT" url="file:///usr/lib/go-1.22" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -59,7 +71,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/jons&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/fazliddin&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;

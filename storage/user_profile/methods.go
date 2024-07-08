@@ -3,26 +3,29 @@ package userprofiles
 import (
 	pb "MusicMesh/users-MusicMesh/generate/user_profile"
 	"context"
+	"log"
 )
 
 func (u *UserProfileRepo) Create(ctx context.Context, in *pb.UserProfile) (*pb.Void, error) {
 	_, err := u.DB.Exec(`INSERT INTO user_profiles(user_id, full_name, bio, role, location, avatar_url, website)
 	values ($1, $2, $3, $4, $5, $6, $7)`, in.UserID, in.FullName, in.Bio, in.Role,
 		in.Location, in.AvatarUrl, in.Website)
+	log.Println(err)
 	return &pb.Void{}, err
 }
 
-func (u *UserProfileRepo) GetById(ctx context.Context, in *pb.UserProfileId) (*pb.UserProfile, error) {
+func (u *UserProfileRepo) GetByID(ctx context.Context, in *pb.UserProfileId) (*pb.UserProfile, error) {
 	user := pb.UserProfile{}
 	err := u.DB.QueryRow("select user_id, full_name, bio, role, location, avatar_url, website from user_profiles where user_id = $1", in.Id).
 		Scan(&user.UserID, &user.FullName, &user.Bio, &user.Role, &user.Location, &user.AvatarUrl, &user.Website)
+	log.Println(err)
 	return &user, err
 }
 
 func (u *UserProfileRepo) Get(ctx context.Context, in *pb.FilterRequest) (*pb.UsersProfiles, error) {
 	users := []*pb.UserProfile{}
 
-	rows, err := u.DB.Query(in.Query, in.Arr...)
+	rows, err := u.DB.Query(in.Query)
 	if err != nil {
 		return nil, err
 	}
